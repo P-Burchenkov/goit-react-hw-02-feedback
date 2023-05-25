@@ -31,9 +31,9 @@ export class App extends Component {
     const { good, neutral, bad } = this.state;
     const total = good + neutral + bad;
     if (!total) {
-      return 0;
+      return '0';
     }
-    return Number(((good * 100) / total).toFixed());
+    return ((good * 100) / total).toFixed();
   };
 
   render() {
