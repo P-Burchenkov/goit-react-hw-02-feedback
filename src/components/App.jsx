@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 
-export class App extends Component {
+class App extends Component {
   state = {
     good: 0,
     neutral: 0,
@@ -52,3 +51,5 @@ export class App extends Component {
     );
   }
 }
+
+export { App };

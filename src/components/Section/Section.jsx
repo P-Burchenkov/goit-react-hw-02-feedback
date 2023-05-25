@@ -1,6 +1,5 @@
 import css from './Section.module.css';
 import PropTypes from 'prop-types';
-import { Children } from 'react';
 
 export default function Section({ title, children }) {
   return (
