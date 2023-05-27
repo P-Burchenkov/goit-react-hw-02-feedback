@@ -13,7 +13,6 @@ class App extends Component {
   };
 
   onLeaveFeedback = evt => {
-    console.log(evt.target.id);
     const option = evt.target.id;
     this.setState(prevState => ({
       [option]: prevState[option] + 1,
@@ -22,11 +21,9 @@ class App extends Component {
 
   countTotalFeedback = () => {
     const optionValues = Object.values(this.state);
-    console.log(optionValues);
-    const total = optionValues.reduce((previousValue, optionValue) => {
+    return optionValues.reduce((previousValue, optionValue) => {
       return previousValue + optionValue;
     }, 0);
-    return total;
   };
 
   countPositiveFeedbackPercentage = () => {
