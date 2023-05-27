@@ -3,6 +3,8 @@ import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
 
+const OPTIONS = ['good', 'neutral', 'bad'];
+
 class App extends Component {
   state = {
     good: 0,
@@ -11,24 +13,25 @@ class App extends Component {
   };
 
   onLeaveFeedback = evt => {
-    if (evt.target.id === 'good') {
-      this.setState(prevState => ({ good: prevState.good + 1 }));
-    }
-    if (evt.target.id === 'neutral') {
-      this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-    }
-    if (evt.target.id === 'bad') {
-      this.setState(prevState => ({ bad: prevState.bad + 1 }));
-    }
+    console.log(evt.target.id);
+    const option = evt.target.id;
+    this.setState(prevState => ({
+      [option]: prevState[option] + 1,
+    }));
   };
 
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
+    const optionValues = Object.values(this.state);
+    console.log(optionValues);
+    const total = optionValues.reduce((previousValue, optionValue) => {
+      return previousValue + optionValue;
+    }, 0);
+    return total;
   };
+
   countPositiveFeedbackPercentage = () => {
-    const { good, neutral, bad } = this.state;
-    const total = good + neutral + bad;
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
     if (!total) {
       return '0';
     }
@@ -39,7 +42,10 @@ class App extends Component {
     const { good, neutral, bad } = this.state;
     return (
       <Section title="Please, leave your feedback">
-        <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
+        <FeedbackOptions
+          options={OPTIONS}
+          onLeaveFeedback={this.onLeaveFeedback}
+        />
         <Statistics
           good={good}
           neutral={neutral}
